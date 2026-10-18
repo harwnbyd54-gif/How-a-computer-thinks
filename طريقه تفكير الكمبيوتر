@@ -1,0 +1,37 @@
+# نموذج يوضح فكرة "التسلسل والربط" (Method Chaining / Pipeline) في بايثون
+
+class TextPipeline:
+    def __init__(self, data):
+        self.data = data
+
+    def clean(self):
+        # إزالة الفراغات الزائدة
+        self.data = [item.strip() for item in self.data]
+        return self
+
+    def to_upper(self):
+        # تحويل الحروف إلى كبيرة
+        self.data = [item.upper() for item in self.data]
+        return self
+
+    def sort_data(self):
+        # ترتيب العناصر
+        self.data = sorted(self.data)
+        return self
+
+    def get_result(self):
+        return self.data
+
+# --- التطبيق العملي ---
+raw_names = ["  ahmed ", " SALAH ", "  mONa ", "omar"]
+
+# تطبيق فكرة التسلسل (Method Chaining) في سطر واحد متصل
+processed_names = (
+    TextPipeline(raw_names)
+        .clean()
+        .to_upper()
+        .sort_data()
+        .get_result()
+)
+
+print("النتائج النهائية بعد المعالجة عبر التسلسل:", processed_names)
